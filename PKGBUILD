@@ -45,7 +45,7 @@ optdepends=(
   'libpulse: PulseAudio support'
 )
 provides=('chatgpt')
-conflicts=('chatgpt')
+conflicts=('chatgpt' 'codex-desktop')
 options=('!strip')
 source=(
   "chatgpt_${pkgver}_amd64.deb::https://persistent.oaistatic.com/codex-app-prod/linux/deb/latest/chatgpt_amd64.deb"
