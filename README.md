@@ -1,8 +1,8 @@
 # ChatGPT Desktop for Arch Linux
 
 Unofficial Arch Linux packaging for the official OpenAI ChatGPT desktop app.
-The package repacks OpenAI's x86-64 Debian package without modifying the
-application payload.
+The package repacks OpenAI's x86-64 Debian package and applies the narrowly
+scoped compatibility workarounds documented below.
 
 > [!NOTE]
 > OpenAI currently documents Ubuntu, Debian, and Fedora as supported Linux
@@ -40,6 +40,18 @@ This package installs a small wrapper that automatically passes
 `--ozone-platform=wayland` when `WAYLAND_DISPLAY` is set. X11 sessions remain
 unchanged, and an explicitly supplied `--ozone-platform=...` option always
 takes precedence.
+
+## 26.908.40401 renderer workaround
+
+The upstream `26.908.40401` renderer calls a non-callable export while loading
+its authenticated routes, causing the generic **ChatGPT hit a snag** screen.
+This package replaces that four-byte initializer call with an equal-length
+no-op inside `app.asar`, preserving all archive offsets.
+
+The package build requires exactly one match for the known broken byte sequence
+and verifies the replacement afterward. It therefore fails safely if a future
+upstream bundle changes instead of applying the workaround to unknown code. The
+workaround should be removed once upstream ships a corrected renderer.
 
 ## Updating
 
