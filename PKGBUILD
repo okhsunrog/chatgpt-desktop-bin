@@ -36,6 +36,7 @@ depends=(
   'openssl'
   'pango'
   'systemd-libs'
+  'vulkan-driver'
   'xdg-utils'
   'xz'
 )
