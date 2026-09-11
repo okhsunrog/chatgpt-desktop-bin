@@ -33,6 +33,7 @@ pkgbase = chatgpt-desktop-bin
 	depends = openssl
 	depends = pango
 	depends = systemd-libs
+	depends = vulkan-driver
 	depends = xdg-utils
 	depends = xz
 	optdepends = apparmor: load the bundled ChatGPT AppArmor profile
