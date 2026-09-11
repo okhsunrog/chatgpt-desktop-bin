@@ -45,10 +45,10 @@ takes precedence.
 
 When OpenAI publishes a new build:
 
-1. Download the current x86-64 `.deb` from the official `latest` endpoint.
-2. Read its `Version` field from `control.tar.*`.
-3. Update `pkgver`, reset `pkgrel` to `1`, and update the Debian package SHA-256
+1. Read the current x86-64 package metadata from the official stable APT index.
+2. Update `pkgver`, reset `pkgrel` to `1`, and update the Debian package SHA-256
    checksum in `PKGBUILD`.
+3. Confirm the corresponding versioned APT pool object is available.
 4. Regenerate `.SRCINFO` and build a clean package:
 
 ```bash
@@ -57,10 +57,16 @@ makepkg --cleanbuild --force
 namcap PKGBUILD
 ```
 
-The upstream package is downloaded from:
+Current metadata is published at:
 
 ```text
-https://persistent.oaistatic.com/codex-app-prod/linux/deb/latest/chatgpt_amd64.deb
+https://persistent.oaistatic.com/codex-app-prod/linux/deb/dists/stable/main/binary-amd64/Packages
+```
+
+PKGBUILD sources use immutable, versioned pool objects:
+
+```text
+https://persistent.oaistatic.com/codex-app-prod/linux/deb/pool/main/c/chatgpt/chatgpt_${pkgver}_amd64.deb
 ```
 
 ## Verification
