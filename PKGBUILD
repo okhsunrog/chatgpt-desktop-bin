@@ -1,7 +1,7 @@
 # Maintainer: okhsunrog <me@okhsunrog.dev>
 
 pkgname=chatgpt-desktop-bin
-pkgver=26.903.71938
+pkgver=26.908.40401
 pkgrel=1
 pkgdesc='Official ChatGPT desktop app for Linux'
 arch=('x86_64')
@@ -52,12 +52,41 @@ source=(
   'chatgpt-wrapper.sh'
 )
 sha256sums=(
-  '13f46df73b06df6e13e9e750b2f3c89a985863741ea825d2d356f52559f55abd'
+  '7c089bda20728723e7ad16b7295198ddce14afd53e03f8a48f6735449f48cd03'
   '68a4fa17d496fc8fb1941e646a8599a039d96a46dcb69a8267c12a053f11e646'
 )
 
+_patch_renderer_bundle() {
+  local app_asar=$1
+  local broken='n();export{r as AppLayoutRoute,t as AuthedRoute,o as n,s as t};'
+  local fixed='0;  export{r as AppLayoutRoute,t as AuthedRoute,o as n,s as t};'
+  local -a matches
+
+  # 26.908.40401 calls a non-callable app-primary export while loading the
+  # authenticated routes. Keep the replacement byte-for-byte the same length
+  # so the offsets in the ASAR header remain valid.
+  [[ ${#broken} -eq ${#fixed} ]] || return 1
+  mapfile -t matches < <(LC_ALL=C grep -aboF "$broken" "$app_asar")
+  if (( ${#matches[@]} != 1 )); then
+    printf 'Expected one renderer patch target, found %d\n' "${#matches[@]}" >&2
+    return 1
+  fi
+
+  local offset=${matches[0]%%:*}
+  printf '%s' "$fixed" | dd of="$app_asar" bs=1 seek="$offset" \
+    conv=notrunc status=none
+
+  if LC_ALL=C grep -aqF "$broken" "$app_asar" || \
+      ! LC_ALL=C grep -aqF "$fixed" "$app_asar"; then
+    printf 'Renderer patch verification failed\n' >&2
+    return 1
+  fi
+}
+
 package() {
   bsdtar --no-same-owner -xf data.tar.xz -C "$pkgdir" ./etc ./usr
+
+  _patch_renderer_bundle "$pkgdir/usr/lib/chatgpt/resources/app.asar"
 
   # Debian packaging metadata is not useful on Arch Linux.
   rm -rf "$pkgdir/usr/share/lintian"
