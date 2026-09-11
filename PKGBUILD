@@ -48,7 +48,7 @@ provides=('chatgpt')
 conflicts=('chatgpt')
 options=('!strip')
 source=(
-  "chatgpt_${pkgver}_amd64.deb::https://persistent.oaistatic.com/codex-app-prod/linux/deb/latest/chatgpt_amd64.deb"
+  "chatgpt_${pkgver}_amd64.deb::https://persistent.oaistatic.com/codex-app-prod/linux/deb/pool/main/c/chatgpt/chatgpt_${pkgver}_amd64.deb"
   'chatgpt-wrapper.sh'
 )
 sha256sums=(
