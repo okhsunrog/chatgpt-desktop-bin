@@ -1,7 +1,7 @@
 # Maintainer: okhsunrog <me@okhsunrog.dev>
 
 pkgname=chatgpt-desktop-bin
-pkgver=26.901.41600
+pkgver=26.908.40834
 pkgrel=1
 pkgdesc='Official ChatGPT desktop app for Linux'
 arch=('x86_64')
@@ -48,17 +48,16 @@ provides=('chatgpt')
 conflicts=('chatgpt')
 options=('!strip')
 source=(
-  "chatgpt_${pkgver}_amd64.deb::https://persistent.oaistatic.com/codex-app-prod/linux/deb/latest/chatgpt_amd64.deb"
+  "chatgpt_${pkgver}_amd64.deb::https://persistent.oaistatic.com/codex-app-prod/linux/deb/pool/main/c/chatgpt/chatgpt_${pkgver}_amd64.deb"
   'chatgpt-wrapper.sh'
 )
 sha256sums=(
-  '15cf422a77e8f28a7553d3180b8c72784a994438a141784c82d72cde93efca77'
+  'da37b8e7bcefaaea019c478cacbe6c73ee1ddd15e0e1ebb3c7ef0a42dd818ac2'
   '68a4fa17d496fc8fb1941e646a8599a039d96a46dcb69a8267c12a053f11e646'
 )
 
 package() {
-  bsdtar -xf "chatgpt_${pkgver}_amd64.deb" data.tar.xz
-  bsdtar -xf data.tar.xz -C "$pkgdir" ./etc ./usr
+  bsdtar --no-same-owner -xf data.tar.xz -C "$pkgdir" ./etc ./usr
 
   # Debian packaging metadata is not useful on Arch Linux.
   rm -rf "$pkgdir/usr/share/lintian"

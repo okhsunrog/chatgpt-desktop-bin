@@ -1,8 +1,8 @@
 # ChatGPT Desktop for Arch Linux
 
 Unofficial Arch Linux packaging for the official OpenAI ChatGPT desktop app.
-The package repacks OpenAI's x86-64 Debian package without modifying the
-application payload.
+The package repacks OpenAI's x86-64 Debian package and installs the
+Wayland-aware launcher wrapper documented below.
 
 > [!NOTE]
 > OpenAI currently documents Ubuntu, Debian, and Fedora as supported Linux
@@ -21,7 +21,7 @@ cd chatgpt-desktop-bin
 makepkg -si
 ```
 
-The download is roughly 334 MiB. The resulting package is roughly 448 MiB and
+The download is roughly 381 MiB. The resulting package is roughly 490 MiB and
 uses about 1.3 GiB when installed.
 
 Launch **ChatGPT** from the application menu or run:
@@ -45,10 +45,10 @@ takes precedence.
 
 When OpenAI publishes a new build:
 
-1. Download the current x86-64 `.deb` from the official `latest` endpoint.
-2. Read its `Version` field from `control.tar.*`.
-3. Update `pkgver`, reset `pkgrel` to `1`, and update the Debian package SHA-256
+1. Read the current x86-64 package metadata from the official stable APT index.
+2. Update `pkgver`, reset `pkgrel` to `1`, and update the Debian package SHA-256
    checksum in `PKGBUILD`.
+3. Confirm the corresponding versioned APT pool object is available.
 4. Regenerate `.SRCINFO` and build a clean package:
 
 ```bash
@@ -57,10 +57,16 @@ makepkg --cleanbuild --force
 namcap PKGBUILD
 ```
 
-The upstream package is downloaded from:
+Current metadata is published at:
 
 ```text
-https://persistent.oaistatic.com/codex-app-prod/linux/deb/latest/chatgpt_amd64.deb
+https://persistent.oaistatic.com/codex-app-prod/linux/deb/dists/stable/main/binary-amd64/Packages
+```
+
+PKGBUILD sources use immutable, versioned pool objects:
+
+```text
+https://persistent.oaistatic.com/codex-app-prod/linux/deb/pool/main/c/chatgpt/chatgpt_${pkgver}_amd64.deb
 ```
 
 ## Verification
