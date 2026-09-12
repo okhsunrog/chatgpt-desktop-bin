@@ -1,8 +1,8 @@
 # ChatGPT Desktop for Arch Linux
 
 Unofficial Arch Linux packaging for the official OpenAI ChatGPT desktop app.
-The package repacks OpenAI's x86-64 Debian package without modifying the
-application payload.
+The package repacks OpenAI's x86-64 Debian package and installs the
+Wayland-aware launcher wrapper documented below.
 
 > [!NOTE]
 > OpenAI currently documents Ubuntu, Debian, and Fedora as supported Linux
@@ -21,7 +21,7 @@ cd chatgpt-desktop-bin
 makepkg -si
 ```
 
-The download is roughly 334 MiB. The resulting package is roughly 448 MiB and
+The download is roughly 381 MiB. The resulting package is roughly 490 MiB and
 uses about 1.3 GiB when installed.
 
 Launch **ChatGPT** from the application menu or run:
