@@ -1,6 +1,6 @@
 pkgbase = chatgpt-desktop-bin
 	pkgdesc = Official ChatGPT desktop app for Linux
-	pkgver = 26.917.51856
+	pkgver = 26.917.61114
 	pkgrel = 1
 	url = https://developers.openai.com/codex/app
 	arch = x86_64
@@ -43,9 +43,9 @@ pkgbase = chatgpt-desktop-bin
 	conflicts = chatgpt
 	conflicts = codex-desktop
 	options = !strip
-	source = chatgpt_26.917.51856_amd64.deb::https://persistent.oaistatic.com/codex-app-prod/linux/deb/pool/main/c/chatgpt/chatgpt_26.917.51856_amd64.deb
+	source = chatgpt_26.917.61114_amd64.deb::https://persistent.oaistatic.com/codex-app-prod/linux/deb/pool/main/c/chatgpt/chatgpt_26.917.61114_amd64.deb
 	source = chatgpt-wrapper.sh
-	sha256sums = 4a23c77b6fb27ccf65f8af97ed8c4a9ddd901cd76ecec494ce83856f0f936d8c
+	sha256sums = 7bea2eff4a46abe0f28e39ec65eb6e6e51c97bbcdad89d25abe5bec4318955c9
 	sha256sums = 68a4fa17d496fc8fb1941e646a8599a039d96a46dcb69a8267c12a053f11e646
 
 pkgname = chatgpt-desktop-bin

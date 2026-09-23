@@ -21,7 +21,7 @@ cd chatgpt-desktop-bin
 makepkg -si
 ```
 
-The download is roughly 334 MiB. The resulting package is roughly 448 MiB and
+The download is roughly 401 MiB. The resulting package is roughly 512 MiB and
 uses about 1.3 GiB when installed.
 
 Launch **ChatGPT** from the application menu or run:
