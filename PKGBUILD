@@ -57,8 +57,7 @@ sha256sums=(
 )
 
 package() {
-  bsdtar -xf "chatgpt_${pkgver}_amd64.deb" data.tar.xz
-  bsdtar -xf data.tar.xz -C "$pkgdir" ./etc ./usr
+  bsdtar --no-same-owner -xf data.tar.xz -C "$pkgdir" ./etc ./usr
 
   # Debian packaging metadata is not useful on Arch Linux.
   rm -rf "$pkgdir/usr/share/lintian"
