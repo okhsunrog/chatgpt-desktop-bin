@@ -1,7 +1,7 @@
 # Maintainer: okhsunrog <me@okhsunrog.dev>
 
 pkgname=chatgpt-desktop-bin
-pkgver=26.917.61114
+pkgver=26.1007.21434
 pkgrel=1
 pkgdesc='Official ChatGPT desktop app for Linux'
 arch=('x86_64')
@@ -36,6 +36,7 @@ depends=(
   'openssl'
   'pango'
   'systemd-libs'
+  'tpm2-tss'
   'vulkan-driver'
   'xdg-utils'
   'xz'
@@ -53,7 +54,7 @@ source=(
   'chatgpt-wrapper.sh'
 )
 sha256sums=(
-  '7bea2eff4a46abe0f28e39ec65eb6e6e51c97bbcdad89d25abe5bec4318955c9'
+  '276b5341c3d74b261d3ad52106f7fa7edde06841e4767fe2a40cb54099b1f3ed'
   '68a4fa17d496fc8fb1941e646a8599a039d96a46dcb69a8267c12a053f11e646'
 )
 
